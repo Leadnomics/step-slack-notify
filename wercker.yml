@@ -1,5 +1,6 @@
 box: ubuntu12.04-ansible
-  services: wercker/nodejs@1.0.2
+  services:
+    - wercker/nodejs@1.0.2
 build:
   steps:
     - install-packages:
