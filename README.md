@@ -1,6 +1,6 @@
 # step-slack-notify
 
-[![wercker status](https://app.wercker.com/status/4c6285fa5dfd3e7c587a43c217ca75cf "wercker status")](https://app.wercker.com/project/bykey/4c6285fa5dfd3e7c587a43c217ca75cf)
+[![wercker status](https://app.wercker.com/status/532b17911c240b777d000a01 "wercker status")](https://app.wercker.com/project/bykey/532b17911c240b777d000a01)
 
 Send a message to a Slack channel after build or deploy
 
@@ -18,6 +18,8 @@ Send a message to a Slack channel after build or deploy
 
 - `passed-message` - Use this option to override the default passed message
 - `failed-message` - Use this option to override the default failed message
+- `passed-images` - A comma-delimited list of images to add to the passed or failed message...One will be choosen randomly.  For funsies
+- `failed-images` - The same, only when the build fails
 
 ## Example with step variables
 

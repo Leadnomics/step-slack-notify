@@ -20,8 +20,8 @@ var token = process.env["WERCKER_SLACK_NOTIFY_TOKEN"];
 var subdomain = process.env["WERCKER_SLACK_NOTIFY_SUBDOMAIN"];
 var username = process.env["WERCKER_SLACK_NOTIFY_USERNAME"];
 
-var passedImages = process.env['WERCKER_PASSED_IMAGES'];
-var failedImages = process.env['WERCKER_FAILED_IMAGES'];
+var passedImages = process.env['WERCKER_SLACK_NOTIFY_PASSED_IMAGES'];
+var failedImages = process.env['WERCKER_SLACK_NOTIFY_FAILED_IMAGES'];
 
 if (passedImages)
 	passedImages = passedImages.split(',');
@@ -29,6 +29,7 @@ if (passedImages)
 if (failedImages)
 	failedImages = failedImages.split(',');
 
+console.log(passedImages);
 
 if (!process.env["WERCKER_SLACK_NOTIFY_SUBDOMAIN"]) {
 	console.log('Please specify the subdomain property');
@@ -70,7 +71,7 @@ if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
 }
 
 if (passedImages && passedImages.length)
-	passed_message += " " + passedImages[Math.floor(Math.random()*passedImages.length)];
+	passed_message = passed_message + " " + passedImages[Math.floor(Math.random()*passedImages.length)];
 
 if (process.env["WERCKER_RESULT"] == "passed") {
 	if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
