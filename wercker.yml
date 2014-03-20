@@ -1,4 +1,4 @@
-box: wercker/default
+box: wercker/nodejs@1.0.2
 build:
   steps:
     - install-packages:
