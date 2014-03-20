@@ -18,6 +18,16 @@ var started_by = process.env["WERCKER_STARTED_BY"];
 var channel = process.env["WERCKER_SLACK_NOTIFY_CHANNEL"];
 var token = process.env["WERCKER_SLACK_NOTIFY_TOKEN"];
 var subdomain = process.env["WERCKER_SLACK_NOTIFY_SUBDOMAIN"];
+var username = process.env["WERCKER_SLACK_NOTIFY_USERNAME"];
+
+var passedImages = process.env['WERCKER_PASSED_IMAGES'];
+var failedImages = process.env['WERCKER_FAILED_IMAGES'];
+
+if (passedImages)
+	passedImages = passedImages.split(',');
+
+if (failedImages)
+	failedImages = failedImages.split(',');
 
 
 if (!process.env["WERCKER_SLACK_NOTIFY_SUBDOMAIN"]) {
@@ -48,6 +58,9 @@ if (!process.env["WERCKER_SLACK_NOTIFY_FAILED_MESSAGE"]) {
 	}
 }
 
+if (failedImages && failedImages.length)
+	failed_message += " " + failedImages[Math.floor(Math.random()*failedImages.length)];
+
 if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
 	if (!process.env["DEPLOY"]) {
 		passed_message = app_name+": <"+build_url+"|build> of "+git_branch+" by "+started_by+" passed";
@@ -55,6 +68,9 @@ if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
 		passed_message = app_name+": <"+deploy_url+"|deploy> of "+git_branch+" to "+deploy_target+" by "+started_by+" passed";
 	}
 }
+
+if (passedImages && passedImages.length)
+	passed_message += " " + passedImages[Math.floor(Math.random()*passedImages.length)];
 
 if (process.env["WERCKER_RESULT"] == "passed") {
 	if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
@@ -80,7 +96,7 @@ if (process.env["WERCKER_SLACK_NOTIFY_ON"] == "failed") {
 
 icon_url = "https://1.gravatar.com/avatar/f777ecfdf484eed89dc6f215b78fef11?d=https%3A%2F%2Fidenticons.github.com%2F0b5ff56f4bd928b6c99d10dba2f1171a.png";
 
-json = 'payload={"channel": "#'+channel+'", "username": "Wercker", "text": "'+message+'", "icon_url": "'+icon_url+'" }';
+json = 'payload={"channel": "#'+channel+'", "username": "'+username+'", "text": "'+message+'", "icon_url": "'+icon_url+'" }';
 json = JSON.stringify(json);
 
 command = 'curl -X POST --data '+json+' https://'+subdomain+'.slack.com/services/hooks/incoming-webhook?token='+token;
