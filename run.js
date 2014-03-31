@@ -18,7 +18,7 @@ var started_by = process.env["WERCKER_STARTED_BY"];
 var channel = process.env["WERCKER_SLACK_NOTIFY_CHANNEL"];
 var token = process.env["WERCKER_SLACK_NOTIFY_TOKEN"];
 var subdomain = process.env["WERCKER_SLACK_NOTIFY_SUBDOMAIN"];
-var username = process.env["WERCKER_SLACK_NOTIFY_USERNAME"];
+var username = process.env["WERCKER_SLACK_NOTIFY_USERNAME"] || 'Wercker';
 
 var passedImages = process.env['WERCKER_SLACK_NOTIFY_PASSED_IMAGES'];
 var failedImages = process.env['WERCKER_SLACK_NOTIFY_FAILED_IMAGES'];
@@ -28,8 +28,6 @@ if (passedImages)
 
 if (failedImages)
 	failedImages = failedImages.split(',');
-
-console.log(passedImages);
 
 if (!process.env["WERCKER_SLACK_NOTIFY_SUBDOMAIN"]) {
 	console.log('Please specify the subdomain property');
