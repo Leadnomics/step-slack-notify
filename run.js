@@ -71,7 +71,13 @@ if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
 if (passedImages && passedImages.length)
 	passed_message = passed_message + " " + passedImages[Math.floor(Math.random()*passedImages.length)];
 
-if (process.env["WERCKER_RESULT"] == "passed") {
+if (process.env["WERCKER_SLACK_NOTIFY_BEGIN_NOTICE"]) {
+	if (!process.env["DEPLOY"]) {
+		message = app_name+": <"+build_url+"|build> of "+git_branch+" by "+started_by+" passed";
+	} else {
+		message = app_name+": <"+deploy_url+"|deploy> of "+git_branch+" to "+deploy_target+" by "+started_by+" passed";
+	}
+} else if (process.env["WERCKER_RESULT"] == "passed") {
 	if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
 		message = passed_message;
 	} else {
@@ -93,7 +99,7 @@ if (process.env["WERCKER_SLACK_NOTIFY_ON"] == "failed") {
 	}
 }
 
-icon_url = "https://1.gravatar.com/avatar/f777ecfdf484eed89dc6f215b78fef11?d=https%3A%2F%2Fidenticons.github.com%2F0b5ff56f4bd928b6c99d10dba2f1171a.png";
+icon_url = process.env["WERCKER_SLACK_ICON"] || "https://1.gravatar.com/avatar/f777ecfdf484eed89dc6f215b78fef11?d=https%3A%2F%2Fidenticons.github.com%2F0b5ff56f4bd928b6c99d10dba2f1171a.png";
 
 json = 'payload={"channel": "#'+channel+'", "username": "'+username+'", "text": "'+message+'", "icon_url": "'+icon_url+'" }';
 json = JSON.stringify(json);

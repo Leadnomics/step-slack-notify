@@ -23,6 +23,12 @@ properties:
     type: string
   failed-images:
     type: string
+  begin-notice:
+    type: string
+    required: false
   notify-on:
     type: string
     default: always
+  slack-icon:
+    type: string
+    required: false

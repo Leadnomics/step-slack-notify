@@ -15,7 +15,8 @@ Send a message to a Slack channel after build or deploy
 - `channel` - The Slack channel you want to push messages for.
 
 ### optional
-
+- `begin-notice` - Set to true when you want to alert when a build/deploy has begun and thus don't know whether it passed or failed yet
+- `slack-icon` - Icon to use for slack
 - `passed-message` - Use this option to override the default passed message
 - `failed-message` - Use this option to override the default failed message
 - `passed-images` - A comma-delimited list of images to add to the passed or failed message...One will be choosen randomly.  For funsies
