@@ -1,6 +1,6 @@
 {
   "name": "slack-notify",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "dependencies": {
     "request": "~2.34.0",
     "dotenv": "~0.2.5"

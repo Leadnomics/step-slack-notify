@@ -73,9 +73,9 @@ if (passedImages && passedImages.length)
 
 if (process.env["WERCKER_SLACK_NOTIFY_BEGIN_NOTICE"]) {
 	if (!process.env["DEPLOY"]) {
-		message = app_name+": <"+build_url+"|build> of "+git_branch+" by "+started_by+" passed";
+		message = app_name+": <"+build_url+"|build> of "+git_branch+" by "+started_by+" started";
 	} else {
-		message = app_name+": <"+deploy_url+"|deploy> of "+git_branch+" to "+deploy_target+" by "+started_by+" passed";
+		message = app_name+": <"+deploy_url+"|deploy> of "+git_branch+" to "+deploy_target+" by "+started_by+" started";
 	}
 } else if (process.env["WERCKER_RESULT"] == "passed") {
 	if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
