@@ -71,7 +71,7 @@ if (!process.env["WERCKER_SLACK_NOTIFY_PASSED_MESSAGE"]) {
 if (passedImages && passedImages.length)
 	passed_message = passed_message + " " + passedImages[Math.floor(Math.random()*passedImages.length)];
 
-if (process.env["WERCKER_SLACK_NOTIFY_BEGIN_NOTICE"]) {
+if (process.env["WERCKER_SLACK_NOTIFY_BEGIN_NOTICE"] == "true") {
 	if (!process.env["DEPLOY"]) {
 		message = app_name+": <"+build_url+"|build> of "+git_branch+" by "+started_by+" started";
 	} else {
